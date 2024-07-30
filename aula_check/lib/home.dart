@@ -1,3 +1,5 @@
+import 'package:aula_check/check_box_option.dart';
+import 'package:aula_check/check_custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:aula_check/home.dart';
 
@@ -15,40 +17,41 @@ class _HomeState extends State<MyHomePage> {
 
   _HomeState();
 
+  final List<CheckBoxOption> months = [
+    CheckBoxOption(title: 'Janeiro'),
+    CheckBoxOption(title: 'Fevereiro'),
+    CheckBoxOption(title: 'Março'),
+    CheckBoxOption(title: 'Abril'),
+    CheckBoxOption(title: 'Maio'),
+    CheckBoxOption(title: 'Junho'),
+    CheckBoxOption(title: 'Julho'),
+    CheckBoxOption(title: 'Agosto'),
+    CheckBoxOption(title: 'Setembro'),
+    CheckBoxOption(title: 'Outubro'),
+    CheckBoxOption(title: 'Novembro'),
+    CheckBoxOption(title: 'Dezembro'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-          child: Column(
-            children: <Widget>[
-              const Text('Meu check box',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.amber)),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text(
-                    'Checkbox 1',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  Checkbox(
-                      value: cbIsSelected_1,
-                      onChanged: (value) {
-                        setState(() {
-                          cbIsSelected_1 = value!;
-                        });
-                      }),
-                ],
-              ),
-            ],
-          ),
-        ));
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: months.length,
+            itemBuilder: (_, index) {
+              return CheckboxCustomWidget(item: months[index]);
+            }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }
