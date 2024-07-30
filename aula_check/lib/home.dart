@@ -32,27 +32,44 @@ class _HomeState extends State<MyHomePage> {
     CheckBoxOption(title: 'Dezembro'),
   ];
 
+  String resposta = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: months.length,
-            itemBuilder: (_, index) {
-              return CheckboxCustomWidget(item: months[index]);
-            }),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: printSelectedMonths,
-        child: const Icon(Icons.add),
-      ),
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Row(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Radio(
+                    value: 'sim',
+                    groupValue: resposta,
+                    onChanged: (value) {
+                      setState(() {
+                        resposta = value.toString();
+                      });
+                    }),
+                const Text('sim'),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Radio(
+                    value: 'nao',
+                    groupValue: resposta,
+                    onChanged: (value) {
+                      setState(() {
+                        resposta = value.toString();
+                      });
+                    }),
+                const Text('nao'),
+              ],
+            )
+          ],
+        ));
   }
 
   void printSelectedMonths() {
@@ -64,3 +81,11 @@ class _HomeState extends State<MyHomePage> {
     });
   }
 }
+
+//ListView.builder(
+//            shrinkWrap: true,
+//            physics: const NeverScrollableScrollPhysics(),
+//            itemCount: months.length,
+//            itemBuilder: (_, index) {
+//              return CheckboxCustomWidget(item: months[index]);
+//            }),
