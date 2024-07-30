@@ -49,9 +49,18 @@ class _HomeState extends State<MyHomePage> {
             }),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: printSelectedMonths,
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void printSelectedMonths() {
+    List<CheckBoxOption> selectedMonths =
+        List.from(months.where((item) => item.checked));
+
+    selectedMonths.forEach((item) {
+      print(item.title);
+    });
   }
 }
